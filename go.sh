@@ -4,9 +4,9 @@ access_token=eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJlYiI6IkpiMnhrdzVWNUh0WE1XMU
 account_id=acc_00009OeBcb40RrGoHJQAwD
 dedupe_id=$RANDOM-lol
 current_pot_value=$(http "https://api.monzo.com/pots" "Authorization: Bearer $access_token" | jq ".pots[] | select(.id==\"$pot_id\") | .balance")
-echo "there's currently $current_pot_value in the amex pot"
+echo "there's currently $current_pot_value pennies in the amex pot"
 current_balance=$(($(node index.js) * 100))
-echo "the amex balance is $current_balance"
+echo "the amex balance is $current_balance pennies"
 increase=$((current_balance - current_pot_value))
 echo "that's an increase of $increase pennies"
 
@@ -23,4 +23,4 @@ http --form PUT "https://api.monzo.com/pots/$pot_id/deposit" \
 
 echo "transaction complete!!"
 current_pot_value=$(http "https://api.monzo.com/pots" "Authorization: Bearer $access_token" | jq ".pots[] | select(.id==\"$pot_id\") | .balance")
-echo "there's now $current_pot_value in the pot ^_^"
+echo "there's now $current_pot_value pennies in the pot ^_^"

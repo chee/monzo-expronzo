@@ -1,7 +1,11 @@
-let pup = require("puppeteer")
+let pup = require("puppeteer");
 
-void (async function() {
-	let puppy = await pup.launch({ headless: false })
+(async function() {
+	let puppy = await pup.launch({
+		headless: !false,
+		args: ['--no-sandbox'],
+		timeout: 5000
+	})
 	let bone = await puppy.newPage()
 	await bone.goto(
 		"https://global.americanexpress.com/login/en-GB?noRedirect=true&DestPage=%2Fdashboard"
@@ -10,6 +14,10 @@ void (async function() {
 	await bone.type(".eliloUserId input", "snootgirl22")
 	await bone.waitForSelector(".eliloPassword input")
 	await bone.type(".eliloPassword input", "magicfriend22")
+	await new Promise(resolve => setTimeout(resolve), 2000)
+	await bone.mouse.move(10, 20)
+	await bone.mouse.down()
+	await bone.mouse.up()
 	await bone.click("[type=submit]")
 	await bone.waitForSelector(".summary-container")
 	await bone.waitForSelector(
@@ -33,4 +41,7 @@ void (async function() {
 	console.log(currentBalance)
 
 	await puppy.close()
-})()
+})().catch(x => {
+	console.error(x)
+	process.exit(1)
+})
