@@ -10,15 +10,17 @@ let pup = require("puppeteer");
 	await bone.goto(
 		"https://global.americanexpress.com/login/en-GB?noRedirect=true&DestPage=%2Fdashboard"
 	)
+
+	await new Promise(y => setTimeout(y, 5000))
 	await bone.waitForSelector(".eliloUserId input")
 	await bone.type(".eliloUserId input", "snootgirl22")
 	await bone.waitForSelector(".eliloPassword input")
 	await bone.type(".eliloPassword input", "magicfriend22")
-	await new Promise(resolve => setTimeout(resolve), 2000)
 	await bone.mouse.move(10, 20)
 	await bone.mouse.down()
 	await bone.mouse.up()
 	await bone.click("[type=submit]")
+	await bone.waitForNavigation()
 	await bone.waitForSelector(".summary-container")
 	await bone.waitForSelector(
 		"ul .undefined:nth-child(1) .value-link-inline-block"

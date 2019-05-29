@@ -10,6 +10,10 @@ echo "the amex balance is $current_balance pennies"
 increase=$((current_balance - current_pot_value))
 echo "that's an increase of $increase pennies"
 
+if [ -z "$current_balance" ]; then
+	exit 11
+fi
+
 if [ $increase -lt 1 ]; then
 	echo "that's less than a penny, so im doin nothin"
 	exit
