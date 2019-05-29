@@ -24,3 +24,14 @@ http --form PUT "https://api.monzo.com/pots/$pot_id/deposit" \
 echo "transaction complete!!"
 current_pot_value=$(http "https://api.monzo.com/pots" "Authorization: Bearer $access_token" | jq ".pots[] | select(.id==\"$pot_id\") | .balance")
 echo "there's now $current_pot_value pennies in the pot ^_^"
+
+http --form POST "https://api.monzo.com/feed" \
+	"Authorization: Bearer $access_token" \
+	"account_id=$account_id" \
+	"type=basic" \
+	"params[title]=£$((current_pot_value / 100)) - American Express" \
+	"params[image_url]=https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/American_Express_logo.svg/1024px-American_Express_logo.svg.png" \
+	"params[background_color]=#fefefe" \
+	"params[body_color]=#333" \
+	"params[title_color]=#333" \
+	"params[body]=$current_pot_value pennies moved to amex pot 💅"
