@@ -33,9 +33,9 @@ http --form POST "https://api.monzo.com/feed" \
 	"Authorization: Bearer $access_token" \
 	"account_id=$account_id" \
 	"type=basic" \
-	"params[title]=£$((current_pot_value / 100)) - American Express" \
+	"params[title]=£$((increase / 100)) - American Express" \
 	"params[image_url]=https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/American_Express_logo.svg/1024px-American_Express_logo.svg.png" \
 	"params[background_color]=#fefefe" \
 	"params[body_color]=#333" \
 	"params[title_color]=#333" \
-	"params[body]=$current_pot_value pennies moved to amex pot 💅"
+	"params[body]=$increase pennies moved to amex pot 💅"
