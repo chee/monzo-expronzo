@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "chee <chee@snoot.club>",
+  "author": "chee <yay@chee.party>",
   "license": "ISC",
   "dependencies": {
     "amex": "0.0.1",
